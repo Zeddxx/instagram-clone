@@ -46,7 +46,7 @@ const PostForm = ({ count, post, action, setCount }: PostFormTypes) => {
     defaultValues: {
       caption: post ? post?.caption : "",
       location: post ? post?.location : "",
-      tags: post ? post?.tags.join(" ") : "",
+      tags: post ? post?.tags.join(",") : "",
       file: [],
     },
   });
@@ -124,12 +124,12 @@ const PostForm = ({ count, post, action, setCount }: PostFormTypes) => {
                         </div>
 
                         <div className="w-full h-[191px] grid grid-cols-3 overflow-y-scroll photos-gallery">
-                          <div className="bg-black h-[125px] w-full"></div>
-                          <div className="bg-black h-[125px] w-full"></div>
-                          <div className="bg-black h-[125px] w-full"></div>
-                          <div className="bg-black h-[125px] w-full"></div>
-                          <div className="bg-black h-[125px] w-full"></div>
-                          <div className="bg-black h-[125px] w-full"></div>
+                          <div className="bg-black h-[125px] scale-[0.98] w-full"></div>
+                          <div className="bg-black h-[125px] scale-[0.98] w-full"></div>
+                          <div className="bg-black h-[125px] scale-[0.98] w-full"></div>
+                          <div className="bg-black h-[125px] scale-[0.98] w-full"></div>
+                          <div className="bg-black h-[125px] scale-[0.98] w-full"></div>
+                          <div className="bg-black h-[125px] scale-[0.98] w-full"></div>
                         </div>
                       </>
                     </FormControl>
@@ -160,7 +160,7 @@ const PostForm = ({ count, post, action, setCount }: PostFormTypes) => {
                           <Image
                             src={currentFile}
                             alt="upload image"
-                            className="aspect-square h-14 w-14 mt-1.5 cursor-pointer"
+                            className="aspect-square h-14 w-14 mt-1.5 cursor-pointer object-cover"
                             onClick={() => setCount(1)}
                             width={24}
                             height={24}
@@ -197,7 +197,7 @@ const PostForm = ({ count, post, action, setCount }: PostFormTypes) => {
                     <FormControl>
                       <Input
                         type="text"
-                        placeholder="Tags (seperated by space )"
+                        placeholder="Tags (seperated by , )"
                         {...field}
                         className="rounded-none border-none py-0 px-0 text-blue-600"
                       />

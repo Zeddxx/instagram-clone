@@ -66,7 +66,7 @@ const Posts = ({ post }: PostProps) => {
       </div>
 
       <div className="h-auto w-full relative border-b">
-        <Image src={post.imageUrl} alt="post image" width={375} height={375} />
+        <Image src={post.imageUrl} alt="post image" width={375} height={375} className="object-cover max-h-[375px] min-h-[375px]" />
       </div>
 
       <PostStats post={post} userId={user?.$id!} />
@@ -87,16 +87,16 @@ const Posts = ({ post }: PostProps) => {
       </div>
 
       <div className="px-2">
-        {post.comments.length > 0 ? (
           <Drawer
             onOpenChange={() => setIsOpen(!isOpen)}
             modal={false}
             shouldScaleBackground={true}
           >
             <DrawerTrigger className="text-stone-500 text-sm">
-              View all {post.comments.length} comments
+              {post.comments.length > 0 ? `View all ${post.comments.length} comments` : "View comment"}
             </DrawerTrigger>
-            <Comments
+            {isOpen && (
+              <Comments
               user={user!}
               comment={comment}
               handleComment={handleCommentPost}
@@ -104,12 +104,8 @@ const Posts = ({ post }: PostProps) => {
               setComment={setComment}
               isPostPending={isPostPending}
             />
+            )}
           </Drawer>
-        ) : (
-          <p className="text-sm w-fit text-stone-400 cursor-pointer">
-            show comments
-          </p>
-        )}
       </div>
 
       <div className="flex w-full py-3 relative gap-x-1.5 items-center px-2">

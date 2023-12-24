@@ -44,7 +44,6 @@ const FileUploader = ({ fieldChange, mediaUrl, setCurrentFile }: FileUploaderPro
                 className='aspect-square h-full w-full object-cover'
                 />
             </div>
-                <p className='file_uploader-label'>Click or drag photo to replace</p>
             </>
         ) : (
             <div className="w-full flex justify-center flex-col items-center h-[375px]">

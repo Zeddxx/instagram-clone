@@ -31,7 +31,7 @@ const Comments = ({
   setComment,
 }: CommentsProps) => {
   const { data: comments, isLoading: isCommentLoading } =
-    useGetCurrentPostComments(postId);
+    useGetCurrentPostComments(postId || "");
 
   return (
     <DrawerContent className="max-w-[375px] min-h-[470px] max-h-[430px] h-full mx-auto z-20">
@@ -44,7 +44,7 @@ const Comments = ({
 
       {isCommentLoading ? (
         <div className="px-2 w-full h-full">
-            <PostCommentLoading />
+          <PostCommentLoading />
         </div>
       ) : (
         <>
@@ -81,41 +81,48 @@ const Comments = ({
                 </div>
               </div>
             )}
-            {comments?.documents.map((comment: Models.Document) => (
-              <div
-                key={comment.$id}
-                className="flex items-start justify-between gap-2"
-              >
-                <div className="flex gap-x-2">
-                  <Avatar className="h-8 w-8 cursor-pointer">
-                    <AvatarImage src={comment.user.imageUrl} />
-                    <AvatarFallback>CA</AvatarFallback>
-                  </Avatar>
 
-                  <div className="flex flex-col gap-y-px">
-                    <p className="text-xs font-semibold">
-                      {comment.user.username}{" "}
-                      <span className="text-stone-400 ml-2">1d</span>
-                    </p>
-                    <p className="text-sm font-normal">{comment.comment}</p>
+            {comments?.documents.length! > 0 ? (
+              comments?.documents.map((comment: Models.Document) => (
+                <div
+                  key={comment.$id}
+                  className="flex items-start justify-between gap-2"
+                >
+                  <div className="flex gap-x-2">
+                    <Avatar className="h-8 w-8 cursor-pointer">
+                      <AvatarImage src={comment.user.imageUrl} />
+                      <AvatarFallback>CA</AvatarFallback>
+                    </Avatar>
 
-                    <p className="text-stone-400 text-xs font-semibold">
-                      Reply
-                    </p>
+                    <div className="flex flex-col gap-y-px">
+                      <p className="text-xs font-semibold">
+                        {comment.user.username}{" "}
+                        <span className="text-stone-400 ml-2">1d</span>
+                      </p>
+                      <p className="text-sm font-normal">{comment.comment}</p>
+
+                      <p className="text-stone-400 text-xs font-semibold">
+                        Reply
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="cursor-pointer">
+                    <Image
+                      src="/assets/like.svg"
+                      className="dark:invert"
+                      alt="like"
+                      height={14}
+                      width={14}
+                    />
                   </div>
                 </div>
-
-                <div className="cursor-pointer">
-                  <Image
-                    src="/assets/like.svg"
-                    className="dark:invert"
-                    alt="like"
-                    height={14}
-                    width={14}
-                  />
-                </div>
+              ))
+            ) : (
+              <div className="w-full min-h-full flex items-center justify-center">
+                <p className="text-stone-500">no comments yet! 😔</p>
               </div>
-            ))}
+            )}
           </div>
 
           <DrawerFooter className="flex justify-between">

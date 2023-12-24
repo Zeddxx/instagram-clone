@@ -41,10 +41,10 @@ const SignUpPage = () => {
   const router = useRouter();
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
-  // const isFieldEmpty = () => {
-  //   const { name, email, username, password } = form.getValues();
-  //   return !name || !email || !username || !password;
-  // };
+  const isFieldEmpty = () => {
+    const { name, email, username, password } = form.getValues();
+    return !name || !email || !username || !password;
+  };
 
   async function onSubmit(values: z.infer<typeof signUpSchema>) {
     const newUser = await createUserAccount(values)
@@ -84,7 +84,7 @@ const SignUpPage = () => {
               <FormItem>
                 <FormControl>
                   <Input
-                    className="w-full h-[44px] rounded-sm bg-gray-50 placeholder:text-sm"
+                    className="w-full h-[44px] rounded-sm bg-gray-50 dark:bg-neutral-800 placeholder:text-sm"
                     placeholder="Name"
                     {...field}
                   />
@@ -100,7 +100,7 @@ const SignUpPage = () => {
               <FormItem>
                 <FormControl>
                   <Input
-                    className="w-full h-[44px] rounded-sm bg-gray-50 placeholder:text-sm"
+                    className="w-full h-[44px] rounded-sm bg-gray-50 dark:bg-neutral-800 placeholder:text-sm"
                     placeholder="Username"
                     {...field}
                   />
@@ -117,7 +117,7 @@ const SignUpPage = () => {
                 <FormControl>
                   <Input
                     type="email"
-                    className="w-full h-[44px] rounded-sm placeholder:text-sm bg-gray-50"
+                    className="w-full h-[44px] rounded-sm placeholder:text-sm bg-gray-50 dark:bg-neutral-800"
                     placeholder="Email"
                     {...field}
                   />
@@ -145,7 +145,7 @@ const SignUpPage = () => {
                     </span>
                     <Input
                       type={isPasswordVisible ? "text" : "password"}
-                      className="w-full h-[44px] rounded-sm placeholder:text-sm bg-gray-50"
+                      className="w-full h-[44px] rounded-sm placeholder:text-sm bg-gray-50 dark:bg-neutral-800"
                       placeholder="Password"
                       {...field}
                     />
@@ -157,6 +157,7 @@ const SignUpPage = () => {
           />
           <Button
             type="submit"
+            disabled={isFieldEmpty()}
             isLoading={isCreatingUser}
             className="text-sm bg-blue-400 rounded-sm mt-[54px] hover:bg-blue-500"
           >

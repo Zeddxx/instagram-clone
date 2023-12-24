@@ -6,7 +6,7 @@ import {
     useQueryClient,
     useInfiniteQuery
 } from "@tanstack/react-query"
-import { createPost, createUserAccount, deleteSavedPost, getCurrentUser, getRecentPosts, getSpecificPostComments, likePost, postComment, savePost, signInAccount, signOutAccount } from "../appwrite/api"
+import { createPost, createUserAccount, deleteSavedPost, getCurrentUser, getPostById, getRecentPosts, getSpecificPostComments, likePost, postComment, savePost, signInAccount, signOutAccount } from "../appwrite/api"
 import { ICommentType, INewPost, INewUser } from "@/types"
 import { QUERY_KEY } from "./query-key";
 
@@ -127,12 +127,21 @@ export const usePostComment = () => {
 export const useGetCurrentPostComments = (postId: string) => {
     return useQuery({
         queryFn: () => getSpecificPostComments(postId),
-        queryKey: [QUERY_KEY.GET_COMMENTS]
+        queryKey: [QUERY_KEY.GET_COMMENTS, postId],
+        enabled: !!postId
     })
 }
 
 export const useSignOutAccount = () => {
     return useMutation({
         mutationFn: signOutAccount
+    })
+}
+
+export const useGetPostById = (postId?: string) => {
+    return useQuery({
+        queryFn: () => getPostById(postId),
+        queryKey: [QUERY_KEY.GET_POST_BY_ID, postId],
+        enabled: !!postId
     })
 }

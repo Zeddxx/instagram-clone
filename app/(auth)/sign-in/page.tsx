@@ -14,17 +14,19 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { signInValidation } from "@/lib/validation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import Link from "next/link";
 import { useSignInAccount } from "@/lib/react-query/queries-mutation";
 import { useUserContext } from "@/context/auth-context";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const SignInPage = () => {
 
-  const { checkAuthUser, isLoading: isUserLoading } = useUserContext()
+  const { checkAuthUser, isLoading: isUserLoading, user } = useUserContext()
   const { mutateAsync: signInAccount } = useSignInAccount()
+
   const router = useRouter()
 
   const form = useForm<z.infer<typeof signInValidation>>({
@@ -49,7 +51,7 @@ const SignInPage = () => {
     })
 
     if(!session){
-      return alert("signin failed")
+      return toast("Sign in failed! please try again later.")
     }
 
     const isLoggedIn = await checkAuthUser()
@@ -57,9 +59,16 @@ const SignInPage = () => {
     if(isLoggedIn){
       form.reset()
       return router.push("/home")
+    }else {
+      return toast("Sign in failed! some error occurred while signing you in!")
     }
-    return;
   }
+
+  useEffect(() => {
+    if(user){
+      return router.replace("/home")
+    }
+  }, [user, router])
 
   return (
     <div className="w-full mt-10">
@@ -76,7 +85,7 @@ const SignInPage = () => {
                 <FormControl>
                   <Input
                     type="email"
-                    className="w-full h-[44px] rounded-sm bg-gray-50 placeholder:text-sm"
+                    className="w-full h-[44px] rounded-sm bg-gray-50 dark:bg-neutral-800 placeholder:text-sm"
                     placeholder="Email"
                     {...field}
                   />
@@ -104,7 +113,7 @@ const SignInPage = () => {
                     </span>
                     <Input
                       type={isPasswordVisible ? "text" : "password"}
-                      className="w-full h-[44px] rounded-sm placeholder:text-sm bg-gray-50"
+                      className="w-full h-[44px] rounded-sm placeholder:text-sm bg-gray-50 dark:bg-neutral-800"
                       placeholder="Password"
                       {...field}
                     />

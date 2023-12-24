@@ -29,7 +29,7 @@ const ExploreNavbar = () => {
         </div>
       </div>
 
-      <div className="flex items-center gap-x-2 w-full mt-2">
+      <div className="flex items-center gap-x-2 w-full mt-2 overflow-x-scroll textarea-scroll-hide">
         {FilterTap.map((tap) => (
           <Button
             key={tap.name}

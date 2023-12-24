@@ -7,17 +7,25 @@ import Image from "next/image";
 import ExplorePosts from "../explore/_components/explore-posts";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { Models } from "appwrite";
+import UserLoading from "@/components/loaders/user-loading";
 
 const ProfilePage = () => {
-  const { data: user } = useGetCurrentUser();
+  const { data: user, isLoading: isUserLoading } = useGetCurrentUser();
   const { mutate: signOut, isSuccess } = useSignOutAccount()
   const router = useRouter()
+
+  console.log(user);
 
   useEffect(() => {
     if(isSuccess){
         return router.push("/sign-in")
     }
   },[isSuccess])
+
+  if(isUserLoading) {
+    return <UserLoading />
+  }
 
   return (
     <section>
@@ -35,6 +43,7 @@ const ProfilePage = () => {
             <Image
               src="/assets/bar.svg"
               alt="top-bar"
+              className="dark:invert"
               width={20.5}
               height={17.5}
             />
@@ -51,7 +60,7 @@ const ProfilePage = () => {
 
             <div className="flex flex-1 justify-between">
                 <div className="text-center text-sm">
-                    <p>0</p>
+                    <p>{user?.posts.length}</p>
                     <h2>Posts</h2>
                 </div>
                 <div className="text-center text-sm">
@@ -75,15 +84,15 @@ const ProfilePage = () => {
         </Button>
 
         <div className="flex items-center w-full py-4">
-            <div className="h-16 w-16 rounded-full border grid place-items-center">
-                <Image src="/assets/add-story.svg" alt="add story" width={18} height={18} />
+            <div className="h-16 w-16 rounded-full border dark:border-stone-700 grid place-items-center">
+                <Image src="/assets/add-story.svg" alt="add story" className="dark:invert dark:opacity-70" width={18} height={18} />
             </div>
         </div>
       </div>
 
       <div className="flex w-full">
-        <Button variant="ghost" className="flex-1 rounded-none bg-gray-100">
-            <Image src="/assets/grid.svg" alt="posts" width={18} height={18} />
+        <Button variant="ghost" className="flex-1 rounded-none bg-gray-100 dark:bg-stone-800">
+            <Image src="/assets/grid.svg" alt="posts" className="dark:invert" width={18} height={18} />
         </Button>
         <Button disabled variant="ghost" className="flex-1 rounded-none">
             <Image src="/assets/tag.svg" alt="tag" width={18} height={18} />
@@ -91,7 +100,9 @@ const ProfilePage = () => {
       </div>
 
       <ul className="w-full mb-16 grid-flow-row grid grid-cols-3 h-full">
-        <ExplorePosts />
+        {user?.posts.map((post: Models.Document) => (
+          <ExplorePosts key={post.$id} post={post} />
+        ))}
       </ul>
     </section>
   );

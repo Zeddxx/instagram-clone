@@ -1,12 +1,13 @@
 "use client";
 
+import UserLoading from "@/components/loaders/user-loading";
 import FollowingStories from "@/components/shared/following-stories";
 import HomeNavbar from "@/components/shared/home-navbar";
 import Loader from "@/components/shared/loader";
 import Posts from "@/components/shared/posts";
+import { useUserContext } from "@/context/auth-context";
 import { useGetRecentPosts } from "@/lib/react-query/queries-mutation";
 import { Models } from "appwrite";
-import { useRouter } from "next/navigation";
 
 const Home = () => {
   const {
@@ -15,14 +16,18 @@ const Home = () => {
     isError: isErrorPosts,
   } = useGetRecentPosts();
 
-  const router = useRouter()
+  const { user, isLoading: isUserLoading } = useUserContext()
+
+  if(isUserLoading) {
+    return <UserLoading />
+  }
 
   return (
     <section className="h-full relative w-full">
       <header className="fixed top-0 wrapper z-20 flex flex-col justify-end bg-gray-50 dark:bg-neutral-900 h-[5.5rem] border-b">
         <HomeNavbar />
       </header>
-      <FollowingStories />
+      <FollowingStories user={user!} />
       {/* Followings Posts */}
 
       {isPostLoading && !posts ? (

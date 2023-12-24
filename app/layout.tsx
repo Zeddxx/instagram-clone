@@ -4,6 +4,7 @@ import "./globals.css";
 import { QueryProvider } from "@/lib/react-query/query-client-provider";
 import { ThemeProvider } from "@/context/theme-provider";
 import { ModalProvider } from "@/components/shared/modal/modal-provider";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,6 +32,7 @@ export default function RootLayout({
           >
             <ModalProvider />
             {children}
+            <Toaster />
           </ThemeProvider>
         </QueryProvider>
       </body>
