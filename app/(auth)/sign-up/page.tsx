@@ -20,7 +20,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useCreateAccount, useSignInAccount } from "@/lib/react-query/queries-mutation";
 import { useUserContext } from "@/context/auth-context";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const SignUpPage = () => {
 

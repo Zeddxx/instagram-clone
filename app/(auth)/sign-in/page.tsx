@@ -64,11 +64,11 @@ const SignInPage = () => {
     }
   }
 
-  useEffect(() => {
-    if(user){
-      return router.replace("/home")
-    }
-  }, [user, router])
+  // useEffect(() => {
+  //   if(user){
+  //     return router.replace("/home")
+  //   }
+  // }, [user, router])
 
   return (
     <div className="w-full mt-10">

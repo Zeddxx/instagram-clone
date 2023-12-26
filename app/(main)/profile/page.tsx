@@ -9,13 +9,14 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Models } from "appwrite";
 import UserLoading from "@/components/loaders/user-loading";
+import { IoExit } from "react-icons/io5";
+import UserProfile from "@/components/shared/user-profile";
+import UserProfileLoading from "@/components/loaders/user-profile-loading";
 
 const ProfilePage = () => {
-  const { data: user, isLoading: isUserLoading } = useGetCurrentUser();
+  const { data: user, isLoading: isUserLoading, isFetching } = useGetCurrentUser();
   const { mutate: signOut, isSuccess } = useSignOutAccount()
   const router = useRouter()
-
-  console.log(user);
 
   useEffect(() => {
     if(isSuccess){
@@ -23,8 +24,8 @@ const ProfilePage = () => {
     }
   },[isSuccess])
 
-  if(isUserLoading) {
-    return <UserLoading />
+  if(isUserLoading && isFetching) {
+    return <UserProfileLoading />
   }
 
   return (
@@ -32,9 +33,9 @@ const ProfilePage = () => {
       <header className="h-[88px] w-full flex flex-col justify-end px-4">
         <nav className="h-[calc(100%/2)] w-full flex items-center justify-between">
           <div className="">
-            <button onClick={() => signOut()}>
-                sign out
-            </button>
+            <Button onClick={() => signOut()} size="icon" variant="outline">
+              <IoExit size={24} />
+            </Button>
           </div>
 
           <h1 className="font-bold tracking-normal">{user?.username}</h1>
@@ -51,59 +52,7 @@ const ProfilePage = () => {
         </nav>
       </header>
 
-      <div className="w-full h-auto px-4 mt-4 border-b">
-        <div className="flex items-center justify-between gap-10">
-            <Avatar className="h-[86px] w-[86px]">
-                <AvatarImage src={user?.imageUrl} />
-                <AvatarFallback>CU</AvatarFallback>
-            </Avatar>
-
-            <div className="flex flex-1 justify-between">
-                <div className="text-center text-sm">
-                    <p>{user?.posts.length}</p>
-                    <h2>Posts</h2>
-                </div>
-                <div className="text-center text-sm">
-                    <p>0</p>
-                    <h2>Followers</h2>
-                </div>
-                <div className="text-center text-sm">
-                    <p>0</p>
-                    <h2>Following</h2>
-                </div>
-            </div>
-        </div>
-
-        <div className="w-full mt-4">
-            <p>{user?.name}</p>
-            <p>{user?.bio}</p>
-        </div>
-
-        <Button variant="outline" size="sm" className="w-full mt-4 font-semibold">
-            Edit Profile
-        </Button>
-
-        <div className="flex items-center w-full py-4">
-            <div className="h-16 w-16 rounded-full border dark:border-stone-700 grid place-items-center">
-                <Image src="/assets/add-story.svg" alt="add story" className="dark:invert dark:opacity-70" width={18} height={18} />
-            </div>
-        </div>
-      </div>
-
-      <div className="flex w-full">
-        <Button variant="ghost" className="flex-1 rounded-none bg-gray-100 dark:bg-stone-800">
-            <Image src="/assets/grid.svg" alt="posts" className="dark:invert" width={18} height={18} />
-        </Button>
-        <Button disabled variant="ghost" className="flex-1 rounded-none">
-            <Image src="/assets/tag.svg" alt="tag" width={18} height={18} />
-        </Button>
-      </div>
-
-      <ul className="w-full mb-16 grid-flow-row grid grid-cols-3 h-full">
-        {user?.posts.map((post: Models.Document) => (
-          <ExplorePosts key={post.$id} post={post} />
-        ))}
-      </ul>
+      <UserProfile user={user!} type="CurrentUser" />
     </section>
   );
 };

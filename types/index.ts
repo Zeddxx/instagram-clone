@@ -36,3 +36,13 @@ export type ICommentType = {
     postId: string
     userId: string
 }
+
+export type IUpdateUser = {
+    userId: string | undefined
+    name: string
+    username: string
+    bio: string
+    imageUrl: URL | string
+    imageId: string
+    file: File[]
+}
