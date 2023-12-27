@@ -10,6 +10,8 @@ import {
 import { useEffect, useState } from "react";
 import { Drawer, DrawerTrigger } from "../ui/drawer";
 import Comments from "./comments";
+import Link from "next/link";
+import MoreOption from "./more-option";
 
 type PostProps = {
   post: Models.Document;
@@ -23,6 +25,8 @@ const Posts = ({ post }: PostProps) => {
   const { mutateAsync: postComment, isPending: isPostPending } =
     usePostComment();
 
+  const isUserPost = user?.$id === post.creator.$id
+
   const handleCommentPost = async (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
       await postComment({
@@ -33,6 +37,8 @@ const Posts = ({ post }: PostProps) => {
       setComment("");
     }
   };
+
+  const userPost = user?.$id === post.creator.$id
 
   useEffect(() => {
     if (isOpen) {
@@ -49,20 +55,22 @@ const Posts = ({ post }: PostProps) => {
       {/* Posts banner */}
       <div className="h-[54px] w-full px-2 flex border-b items-center justify-between">
         <div className="flex gap-x-[10px] items-center">
+          <Link href={userPost ? '/profile' : `/profile/${post.creator.$id}`}>
           <Avatar className="h-8 w-8">
             <AvatarImage src={post.creator.imageUrl} />
             <AvatarFallback>PA</AvatarFallback>
           </Avatar>
+          </Link>
 
           <div className="flex flex-col text-[13px] leading-none gap-px">
+            <Link href={userPost ? '/profile' : `/profile/${post.creator.$id}`}>
             <h6 className="font-semibold">{post.creator.username}</h6>
-            <p className="text-xs">{post.location}</p>
+            </Link>
+            <p className="text-xs text-muted-foreground font-normal">{post.location}</p>
           </div>
         </div>
 
-        <div className="cursor-pointer">
-          <MoreHorizontalIcon />
-        </div>
+        <MoreOption user={isUserPost} postId={post.$id} />
       </div>
 
       <div className="h-auto w-full relative border-b">
@@ -72,10 +80,8 @@ const Posts = ({ post }: PostProps) => {
       <PostStats post={post} userId={user?.$id!} />
 
       <div className="flex items-center gap-2 px-2">
-        <div className="h-4 w-4 rounded-full bg-black"></div>
-        <p className="text-sm">
-          Liked by{" "}
-          <span className="font-semibold">{post.likes.length} others</span>
+        <p className="text-sm font-medium">
+          {post.likes.length} Likes
         </p>
       </div>
 
@@ -84,6 +90,14 @@ const Posts = ({ post }: PostProps) => {
           <span className="font-semibold">{post.creator.username}</span>{" "}
           {post.caption}
         </p>
+
+        <div className="flex gap-x-1">
+          {post.tags.map((tag: string) => (
+            <p key={tag} className="text-sm text-blue-600">
+              {tag}
+            </p>
+          ))}
+        </div>
       </div>
 
       <div className="px-2">

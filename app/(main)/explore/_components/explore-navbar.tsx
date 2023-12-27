@@ -46,7 +46,7 @@ const ExploreNavbar = () => {
         </div>
 
         {isSearchQuery && (
-          <div className="max-w-[375px] inset-x-0 px-2 py-2 min-h-[calc(100vh-180px)] absolute top-10 shadow rounded-bl-sm rounded-br-sm border dark:bg-black">
+          <div className="max-w-[375px] inset-x-0 px-2 py-2 min-h-[calc(100vh-180px)] absolute top-10 shadow rounded-bl-sm rounded-br-sm border dark:bg-black bg-gray-50">
             {isUserLoading && isUserSearching ? (
               <div className="h-full w-full flex items-center justify-center">
                 loading...

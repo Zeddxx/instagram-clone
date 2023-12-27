@@ -1,71 +1,87 @@
 "use client";
 
 import ProfileUploader from "@/components/shared/profile-uploader";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
 import { Label } from "@/components/ui/label";
-import { useGetCurrentUser, useUpdateUser } from "@/lib/react-query/queries-mutation";
+import {
+  useGetCurrentUser,
+  useUpdateUser,
+} from "@/lib/react-query/queries-mutation";
 import { UpdateProfileValidation } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import * as z from "zod"
+import * as z from "zod";
 
 const EditProfile = () => {
-  
-  const { data: currentUser, isLoading: isCurrentUserLoading, isFetching } = useGetCurrentUser()
-  const { mutateAsync: updateUser, isPending: isLoadingUpdate } = useUpdateUser()
+  const {
+    data: currentUser,
+    isLoading: isCurrentUserLoading,
+    isFetching,
+  } = useGetCurrentUser();
+  const { mutateAsync: updateUser, isPending: isLoadingUpdate } =
+    useUpdateUser();
 
   const router = useRouter();
 
   const form = useForm<z.infer<typeof UpdateProfileValidation>>({
     resolver: zodResolver(UpdateProfileValidation),
     defaultValues: {
-        bio: currentUser?.bio || "",
-        file: [],
-        name: currentUser?.name,
-        username: currentUser?.username
-    }
+      bio: currentUser?.bio || "",
+      file: [],
+      name: currentUser?.name,
+      username: currentUser?.username,
+    },
   });
-  
-  if(!currentUser && isCurrentUserLoading && isFetching) {
-    return <p>Loading...</p>
+
+  if (!currentUser && isCurrentUserLoading && isFetching) {
+    return <p>Loading...</p>;
   }
 
   async function onSubmit(values: z.infer<typeof UpdateProfileValidation>) {
-    const updatedUser = await updateUser({
-      userId: currentUser?.$id,
-      name: values.name,
-      username: values.username,
-      bio: values.bio,
-      file: values.file,
-      imageUrl: currentUser?.imageUser,
-      imageId: currentUser?.imageId
-    })
+    try {
+      const updatedUser = await updateUser({
+        userId: currentUser?.$id,
+        name: values.name,
+        username: values.username,
+        bio: values.bio,
+        file: values.file,
+        imageUrl: currentUser?.imageUser,
+        imageId: currentUser?.imageId,
+      });
 
-    if(!updatedUser){
-      return toast("Update profile failed! 🥲")
+      toast("Profile updated successfully! ❤️");
+      router.push("/profile");
+    } catch (error) {
+      console.log(error);
+      return toast("Update profile failed! 🥲");
     }
-    
-    toast("Profile updated successfully! ❤️")
-    return router.push("/profile")
   }
-  
+
   return (
     <section className="w-full">
-        <nav className="px-2 py-4 flex items-center justify-between bg-gray-300 dark:bg-neutral-900">
-          <button>
-            Cancel
-          </button>
+      <nav className="px-2 py-4 flex items-center justify-between bg-gray-300 dark:bg-neutral-900">
+        <button>Cancel</button>
 
-          <h1>Edit profile</h1>
+        <h1>Edit profile</h1>
 
-          <button onClick={form.handleSubmit(onSubmit)} className="text-blue-500">
-            Done
-          </button>
-        </nav>
+        <button
+          disabled={isLoadingUpdate}
+          onClick={form.handleSubmit(onSubmit)}
+          className="text-blue-500"
+        >
+          Done
+        </button>
+      </nav>
 
-        <Form {...form}>
+      <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex flex-col gap-3 w-full px-4"
@@ -77,7 +93,10 @@ const EditProfile = () => {
               <FormItem>
                 <FormControl className="flex justify-center items-center">
                   <div className="">
-                  <ProfileUploader fieldChange={field.onChange} mediaUrl={currentUser?.imageUrl} />
+                    <ProfileUploader
+                      fieldChange={field.onChange}
+                      mediaUrl={currentUser?.imageUrl}
+                    />
                   </div>
                 </FormControl>
                 <FormMessage />
@@ -91,12 +110,14 @@ const EditProfile = () => {
               <FormItem>
                 <FormControl className="flex-1">
                   <div className="flex gap-x-4 items-center">
-                  <Label htmlFor="name" className="mr-8 text-md font-normal">Name</Label>
-                  <input
-                    className="w-full bg-transparent focus:outline-none border-b h-[44px] rounded-none placeholder:text-sm placeholder:text-stone-400"
-                    placeholder="Name"
-                    {...field}
-                  />
+                    <Label htmlFor="name" className="mr-8 text-md font-normal">
+                      Name
+                    </Label>
+                    <input
+                      className="w-full bg-transparent focus:outline-none border-b h-[44px] rounded-none placeholder:text-sm placeholder:text-stone-400"
+                      placeholder="Name"
+                      {...field}
+                    />
                   </div>
                 </FormControl>
                 <FormMessage />
@@ -110,12 +131,14 @@ const EditProfile = () => {
               <FormItem>
                 <FormControl>
                   <div className="flex gap-x-4 items-center">
-                  <Label htmlFor="username" className="text-md font-normal">Username</Label>
-                  <input
-                    className="w-full h-[44px] rounded-none focus:outline-none border-b bg-transparent placeholder:text-sm"
-                    placeholder="Username"
-                    {...field}
-                  />
+                    <Label htmlFor="username" className="text-md font-normal">
+                      Username
+                    </Label>
+                    <input
+                      className="w-full h-[44px] rounded-none focus:outline-none border-b bg-transparent placeholder:text-sm"
+                      placeholder="Username"
+                      {...field}
+                    />
                   </div>
                 </FormControl>
                 <FormMessage />
@@ -128,13 +151,18 @@ const EditProfile = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                <div className="flex gap-x-4 items-center">
-                  <Label htmlFor="bio" className="mr-[50px] text-md font-normal">Bio</Label>
-                  <input
-                    className="w-full h-[44px] rounded-none focus:outline-none border-b bg-transparent placeholder:text-sm"
-                    placeholder="Bio"
-                    {...field}
-                  />
+                  <div className="flex gap-x-4 items-center">
+                    <Label
+                      htmlFor="bio"
+                      className="mr-[50px] text-md font-normal"
+                    >
+                      Bio
+                    </Label>
+                    <input
+                      className="w-full h-[44px] rounded-none focus:outline-none border-b bg-transparent placeholder:text-sm"
+                      placeholder="Bio"
+                      {...field}
+                    />
                   </div>
                 </FormControl>
                 <FormMessage />
@@ -143,14 +171,12 @@ const EditProfile = () => {
           />
 
           <div className="flex flex-col justify-center items-center h-[320px]">
-            <span className="text-6xl">
-              💀
-            </span>
+            <span className="text-6xl">💀</span>
             <p className="text-stone-500 mt-3">what do you expect!</p>
           </div>
         </form>
       </Form>
     </section>
-  )
-}
-export default EditProfile
+  );
+};
+export default EditProfile;

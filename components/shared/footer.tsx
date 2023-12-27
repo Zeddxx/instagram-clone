@@ -13,12 +13,12 @@ const Footer = () => {
     const { user } = useUserContext()
   return (
     <footer className="fixed mx-auto bottom-0 inset-x-0 w-[375px] border bg-white dark:bg-neutral-900 h-16 flex items-center px-4">
-        <div className="flex w-full h-fit dark:invert">
+        <div className="flex w-full h-fit">
             {MobileNavItems.map((item) => {
                 const isActive = pathname === item.href;
 
                 return(
-                <div key={item.name} className="w-[calc(100%/5)] shrink-0 flex items-center justify-center">
+                <div key={item.name} className="w-[calc(100%/5)] shrink-0 flex items-center justify-center dark:invert">
                     <Link href={item.href} className="w-fit">
                 <Image
                 src={isActive ? item.active : item.icon}

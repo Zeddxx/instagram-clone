@@ -46,3 +46,13 @@ export type IUpdateUser = {
     imageId: string
     file: File[]
 }
+
+export type IUpdatePost = {
+    postId: string
+    caption: string
+    imageId: string
+    imageUrl: URL | string
+    file: File[]
+    location?: string | undefined
+    tags?: string | undefined
+}

@@ -21,9 +21,16 @@ import {
   savePost,
   signInAccount,
   signOutAccount,
+  updatePost,
   updateUser,
 } from "../appwrite/api";
-import { ICommentType, INewPost, INewUser, IUpdateUser } from "@/types";
+import {
+  ICommentType,
+  INewPost,
+  INewUser,
+  IUpdatePost,
+  IUpdateUser,
+} from "@/types";
 import { QUERY_KEY } from "./query-key";
 
 export const useCreateAccount = () => {
@@ -193,6 +200,18 @@ export const useUpdateUser = () => {
       });
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEY.GET_USER_BY_ID, data?.$id],
+      });
+    },
+  });
+};
+
+export const useUpdatePost = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (post: IUpdatePost) => updatePost(post),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEY.GET_POST_BY_ID, data?.$id],
       });
     },
   });

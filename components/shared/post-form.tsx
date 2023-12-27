@@ -20,7 +20,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useState } from "react";
 import FileUploader from "./file-uploader";
-import { useCreatePost } from "@/lib/react-query/queries-mutation";
+import { useCreatePost, useUpdatePost } from "@/lib/react-query/queries-mutation";
+import { toast } from "sonner";
 
 type PostFormTypes = {
   post?: Models.Document;
@@ -31,7 +32,9 @@ type PostFormTypes = {
 
 const PostForm = ({ count, post, action, setCount }: PostFormTypes) => {
   const { user } = useUserContext();
-  const { mutateAsync: createPost, isPending: isLoadingCreate } = useCreatePost()
+  const { mutateAsync: createPost, isPending: isLoadingCreate } =
+    useCreatePost();
+  const { mutateAsync: updatePost, isPending: isUpdatingPost } = useUpdatePost()
 
   const router = useRouter();
 
@@ -52,16 +55,39 @@ const PostForm = ({ count, post, action, setCount }: PostFormTypes) => {
   });
 
   async function onSubmit(values: z.infer<typeof PostValidation>) {
-    const newPost = await createPost({
-      ...values,
-      userId: user.id,
-    })
+    try {
+      if(post && action === "Update") {
+        toast.loading("updating post...")
+        const updatedPost = await updatePost({
+          ...values,
+          postId: post.$id,
+          imageUrl: post.imageUrl,
+          imageId: post.imageId
+        })
 
-    if(!newPost) {
-      return;
+        if(!updatedPost) {
+          toast.error("Error updating post! 😖")
+        }
+        toast.success("Post updated successfully! 💨")
+        return router.push(`/post/${post.$id}`)
+      }
+
+
+      toast.loading("Post is creating... 👀");
+      const newPost = await createPost({
+        ...values,
+        userId: user.id,
+      });
+
+      if (!newPost) {
+        return toast.error("Error creating new post! 💀🥲");
+      }
+      toast.success("Post created successfully! 😀❤️");
+      router.push("/home");
+    } catch (error) {
+      console.log(error);
+      return toast.error("Error creating post! 💀😔");
     }
-
-    router.push("/home")
   }
   return (
     <>
@@ -93,7 +119,7 @@ const PostForm = ({ count, post, action, setCount }: PostFormTypes) => {
                   onClick={form.handleSubmit(onSubmit)}
                   className="py-2 font-medium text-blue-500"
                 >
-                  Create
+                  {action}
                 </button>
               </>
             )}

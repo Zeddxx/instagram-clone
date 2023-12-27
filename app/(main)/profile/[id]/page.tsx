@@ -2,7 +2,7 @@
 
 import UserProfileLoading from "@/components/loaders/user-profile-loading";
 import UserProfile from "@/components/shared/user-profile";
-import { useGetCurrentUser, useGetUserProfile } from "@/lib/react-query/queries-mutation";
+import { useGetUserProfile } from "@/lib/react-query/queries-mutation";
 import { ArrowLeft, MoreVerticalIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 

@@ -23,11 +23,10 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 const SignInPage = () => {
+  const { checkAuthUser, isLoading: isUserLoading, user } = useUserContext();
+  const { mutateAsync: signInAccount } = useSignInAccount();
 
-  const { checkAuthUser, isLoading: isUserLoading, user } = useUserContext()
-  const { mutateAsync: signInAccount } = useSignInAccount()
-
-  const router = useRouter()
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof signInValidation>>({
     resolver: zodResolver(signInValidation),
@@ -45,30 +44,33 @@ const SignInPage = () => {
   };
 
   async function onSubmit(values: z.infer<typeof signInValidation>) {
-    const session = await signInAccount({
-      email: values.email,
-      password: values.password
-    })
+    try {
+      toast.loading("Logging you in...")
+      const session = await signInAccount({
+        email: values.email,
+        password: values.password,
+      });
 
-    if(!session){
-      return toast("Sign in failed! please try again later.")
-    }
+      if (!session) {
+        return toast("Sign in failed! please try again later.");
+      }
 
-    const isLoggedIn = await checkAuthUser()
+      const isLoggedIn = await checkAuthUser();
 
-    if(isLoggedIn){
-      form.reset()
-      return router.push("/home")
-    }else {
-      return toast("Sign in failed! some error occurred while signing you in!")
+      if (isLoggedIn) {
+        form.reset();
+        toast.success("Logged in successfully ❤️");
+        return router.push("/home");
+      } else {
+        return toast(
+          "Sign in failed! some error occurred while signing you in!"
+        );
+      }
+    } catch (error) {
+      console.log(error);
+      return toast("Sign in failed! please try again later.");
     }
   }
-
-  // useEffect(() => {
-  //   if(user){
-  //     return router.replace("/home")
-  //   }
-  // }, [user, router])
 
   return (
     <div className="w-full mt-10">
@@ -124,7 +126,7 @@ const SignInPage = () => {
             )}
           />
           <Button
-          isLoading={isUserLoading}
+            isLoading={isUserLoading}
             type="submit"
             disabled={form.formState.isSubmitting || isFieldEmpty()}
             className="text-sm bg-blue-400 rounded-sm mt-[54px] hover:bg-blue-500"
@@ -135,10 +137,13 @@ const SignInPage = () => {
       </Form>
 
       <div className="w-full text-center mt-[38.5px]">
-    <p className="text-gray-500 text-sm">Already have an account? {" "}
-      <Link href="sign-up" className="text-blue-600">Sign up.</Link>
-    </p>
-    </div>
+        <p className="text-gray-500 text-sm">
+          Already have an account?{" "}
+          <Link href="sign-up" className="text-blue-600">
+            Sign up.
+          </Link>
+        </p>
+      </div>
     </div>
   );
 };

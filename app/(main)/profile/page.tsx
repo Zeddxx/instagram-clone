@@ -15,6 +15,7 @@ import UserProfileLoading from "@/components/loaders/user-profile-loading";
 
 const ProfilePage = () => {
   const { data: user, isLoading: isUserLoading, isFetching } = useGetCurrentUser();
+  console.log(user);
   const { mutate: signOut, isSuccess } = useSignOutAccount()
   const router = useRouter()
 
