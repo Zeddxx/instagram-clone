@@ -2,6 +2,8 @@
 
 <img src="./public/assets/logo-white.svg" alt="instagram logo" width="1000px"/>
 
+[![clone](https://img.shields.io/static/v1?label=We're&message=Hiring&color=blue&style=flat-square)](https://appwrite.io/company/careers)
+
 # Instagram Clone 
 [Link to clone](https://instagram-clone-zeddxx.vercel.app)
 
@@ -16,7 +18,7 @@ This is just made for learning purposes i have no intension to use this as marke
 
 This is a social media clone made with NextJs 13.
 - Reactjs as frontend
-- Appwrite as my database [link to appwrite](https://www.appwrite.io)
+- [Appwrite](https://www.appwrite.io) as my database
     - appwrite auth
     - appwrite storage
     - appwrite databases
