@@ -1,11 +1,12 @@
 > Basicaly i don't know how to write a better readme.md if this contains any mistake please let me know, otherwise let's go.
 
+<img src="./public/assets/logo.svg" alt="instagram logo" width="1000px" style="filter:invert(100); backgroundColor:white"/>
+
 # Instagram Clone 
 [Link to clone](https://instagram-clone-zeddxx.vercel.app)
 
 This is just made for learning purposes i have no intension to use this as marketing and other things 👍
 
-<img src="./public/assets/logo.svg" alt="instagram logo"/>
 
 ## Brief description
 
