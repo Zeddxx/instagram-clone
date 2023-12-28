@@ -9,7 +9,7 @@ This is just made for learning purposes i have no intension to use this as marke
 ## Table of contents:
 
 - [Brief description](#brief-description)
-- [Enviorment variable](#.env)
+- [Enviorment variable](#.env-example)
 
 ## Brief description
 
