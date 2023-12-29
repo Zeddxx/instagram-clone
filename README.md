@@ -8,8 +8,20 @@ This is just made for learning purposes i have no intension to use this as marke
 
 ## Table of contents:
 
+- [Feature's](#feature)
 - [Brief description](#brief-description)
-- [Enviorment variable](#.env-example)
+- [Enviorment variable](#enviorment-variable-example)
+
+## Feature
+
+Some feature that i implemented in this project are:
+- Login and register with email username name password.
+- A look-alike home page just like the instagram homepage.
+- Like functionality with realtime like count change.
+- Comment functionality where user can comment to multiple post.
+- Post creation functionality - You can create the post by going to create.
+- User profile page - user can watch their user profile by clicking into profile icon.
+- explore page where you can see all posts in one place.
 
 ## Brief description
 
@@ -22,12 +34,22 @@ This is a social media clone made with NextJs 13.
 - [shadcn-ui](https://ui.shadcn.com) as my component library.
 - [Tanstack-react-query](https://tanstack.com) for realtime mutations and queries.
 
-## ```.env``` example
+
+## ```enviorment variable``` example
+
+```path:``` root directiory - outside app/ anywhere
 
 ```
+NEXT_PUBLIC_APPWRITE_PROJECT_ID=
+NEXT_PUBLIC_APPWRITE_URL=
+
+NEXT_PUBLIC_APPWRITE_STORAGE_ID=
 NEXT_PUBLIC_APPWRITE_DATABASE_ID=
-NEXT_PUBLIC_APPWRITE_DATABASE_ID=
-NEXT_PUBLIC_APPWRITE_DATABASE_ID=
+
+NEXT_PUBLIC_APPWRITE_SAVES_COLLECTION_ID=
+NEXT_PUBLIC_APPWRITE_POST_COLLECTION_ID=
+NEXT_PUBLIC_APPWRITE_USER_COLLECTION_ID=
+NEXT_PUBLIC_APPWRITE_COMMENT_COLLECTION_ID=
 ```
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
