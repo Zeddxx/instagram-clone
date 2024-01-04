@@ -1,16 +1,12 @@
-import Footer from "@/components/shared/footer"
-import React from "react"
+import Footer from "@/components/shared/footer";
+import React from "react";
 
-const HomeLayout = ({
-    children
-} : {
-    children: React.ReactNode
-}) => {
+const HomeLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <section className="w-full h-auto">
+      <section className="w-full overflow-hidden h-auto">
         {children}
         <Footer />
-    </section>
-  )
-}
-export default HomeLayout
+      </section>
+  );
+};
+export default HomeLayout;

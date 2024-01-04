@@ -12,13 +12,17 @@ import {
 import { Trash } from "lucide-react";
 import { buttonVariants } from "../ui/button";
 
-const DeleteAlert = () => {
+type DeleteAlertProps = {
+  handleDelete: () => void
+}
+
+const DeleteAlert = ({ handleDelete } : DeleteAlertProps ) => {
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="flex w-full justify-between px-2 py-1.5 hover:bg-white/10 rounded-md">
+      <AlertDialogTrigger className="flex w-full justify-between px-2 py-1.5 hover:bg-black/5 dark:hover:bg-white/10 rounded-sm">
         Delete <Trash size={18} />
       </AlertDialogTrigger>
-      <AlertDialogContent className="max-w-[375px] fixed">
+      <AlertDialogContent className="max-w-[375px]">
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
@@ -28,7 +32,7 @@ const DeleteAlert = () => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction className={buttonVariants({ variant: "destructive" })}>
+          <AlertDialogAction onClick={handleDelete} className={buttonVariants({ variant: "destructive" })}>
                 Continue
           </AlertDialogAction>
         </AlertDialogFooter>

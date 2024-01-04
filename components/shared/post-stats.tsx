@@ -17,13 +17,12 @@ type PostStatsProps = {
 };
 
 const PostStats = ({ post, userId }: PostStatsProps) => {
-  
   const likesList = post.likes.map((user: Models.Document) => user.$id);
 
   const [likes, setLikes] = useState(likesList);
   const [isSaved, setIsSaved] = useState(false);
 
-  const { mutateAsync: likePost } = useLikePost();
+  const { mutateAsync: likePost, isPending, isSuccess } = useLikePost();
   const { mutateAsync: savePost } = useSavePost();
   const { mutateAsync: deleteSavedPost } = useDeleteSavedPost();
 
@@ -48,6 +47,7 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
     (record: Models.Document) => record.post.$id === post?.$id
   );
 
+
   useEffect(() => {
     setIsSaved(!!savedPostRecord)
   }, [currentUser])
@@ -64,6 +64,7 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
   };
 
   return (
+    <>
     <div className="flex items-center justify-between h-auto w-full px-2 py-3">
       <div className="h-max flex gap-[17.5px] items-center">
         <div className="cursor-pointer">
@@ -117,6 +118,12 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
         />
       </div>
     </div>
+    <div className="flex items-center gap-2 px-2">
+    <p className="text-sm font-medium">
+    {isPending ? (checkIsLiked(likes, userId) ? Math.max(1, likes.length) : likes.length + 1) : likes.length} Likes
+    </p>
+  </div>
+  </>
   );
 };
 export default PostStats;

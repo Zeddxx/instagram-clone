@@ -60,9 +60,10 @@ export async function signInAccount(user: { email: string; password: string }) {
   try {
     const session = await account.createEmailSession(user.email, user.password);
 
-    return session;
+    return { session, status: "200" };
   } catch (error) {
     console.log(error);
+    return { status: "400", error }
   }
 }
 
@@ -453,6 +454,26 @@ export async function updatePost(post: IUpdatePost) {
     }
 
     return updatedPost;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function deletePost(postId?: string, imageId?: string){
+  if(!postId || !imageId) return;
+
+  try {
+    const statusCode = await databases.deleteDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      postId
+    )
+
+    if(!statusCode) throw Error;
+
+    await deleteFile(imageId);
+
+    return { status: "Ok" };
   } catch (error) {
     console.log(error);
   }

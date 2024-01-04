@@ -46,6 +46,7 @@ const EditProfile = () => {
   }
 
   async function onSubmit(values: z.infer<typeof UpdateProfileValidation>) {
+    toast.loading("Updating user profile...🫷")
     try {
       const updatedUser = await updateUser({
         userId: currentUser?.$id,
@@ -57,25 +58,25 @@ const EditProfile = () => {
         imageId: currentUser?.imageId,
       });
 
-      toast("Profile updated successfully! ❤️");
+      toast.success("Profile updated successfully! ❤️");
       router.push("/profile");
     } catch (error) {
       console.log(error);
-      return toast("Update profile failed! 🥲");
+      toast.error("Update profile failed! 🥲");
     }
   }
 
   return (
     <section className="w-full">
-      <nav className="px-2 py-4 flex items-center justify-between bg-gray-300 dark:bg-neutral-900">
-        <button>Cancel</button>
+      <nav className="px-2 py-4 flex items-center justify-between bg-gray-50 dark:bg-neutral-900">
+        <button className="font-semibold" onClick={() => router.back()}>Cancel</button>
 
-        <h1>Edit profile</h1>
+        <h1 className="text-sm font-semibold">Edit profile</h1>
 
         <button
           disabled={isLoadingUpdate}
           onClick={form.handleSubmit(onSubmit)}
-          className="text-blue-500"
+          className="text-blue-500 font-semibold"
         >
           Done
         </button>
@@ -92,7 +93,7 @@ const EditProfile = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl className="flex justify-center items-center">
-                  <div className="">
+                  <div className="flex flex-col">
                     <ProfileUploader
                       fieldChange={field.onChange}
                       mediaUrl={currentUser?.imageUrl}

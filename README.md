@@ -1,20 +1,36 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+> Basicaly i don't know how to write a better readme.md if this contains any mistake please let me know, otherwise let's go.
 
-## Getting Started
+<img src="./public/assets/logo-white.svg" alt="instagram logo" width="1000px"/>
 
-First, run the development server:
+# Instagram Clone
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+[Link](https://instagram-clone-zeddxx.vercel.app)
+This is just made for learning purposes i have no intension to use this as marketing and other things 👍
+
+## Table of contents:
+
+- [Brief description](#brief-description)
+- [Enviorment variable](#.env-example)
+
+## Brief description
+
+This is a social media clone made with NextJs 13.
+
+- Reactjs as frontend
+- [Appwrite](https://www.appwrite.io) as my database
+  - appwrite auth
+  - appwrite storage
+  - appwrite databases
+- [shadcn-ui](https://ui.shadcn.com) as my component library.
+- [Tanstack-react-query](https://tanstack.com) for realtime mutations and queries.
+
+## `.env` example
+
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+NEXT_PUBLIC_APPWRITE_DATABASE_ID=
+NEXT_PUBLIC_APPWRITE_DATABASE_ID=
+NEXT_PUBLIC_APPWRITE_DATABASE_ID=
+```
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 

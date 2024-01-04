@@ -4,6 +4,7 @@ import { Button } from "../ui/button";
 import Image from "next/image";
 import ExplorePosts from "@/app/(main)/explore/_components/explore-posts";
 import Link from "next/link";
+import ProfileTabs from "./profile-tabs";
 
 type UserProfileProps = {
   user: Models.Document;
@@ -11,6 +12,7 @@ type UserProfileProps = {
 };
 
 const UserProfile = ({ user, type }: UserProfileProps) => {
+  console.log(user);
   return (
     <>
       <div className="w-full h-auto px-4 mt-4 border-b">
@@ -73,7 +75,7 @@ const UserProfile = ({ user, type }: UserProfileProps) => {
         </div>
       </div>
 
-      <div className="flex w-full">
+      {/* <div className="flex w-full">
         <Button
           variant="ghost"
           className="flex-1 rounded-none bg-gray-100 dark:bg-stone-800"
@@ -95,27 +97,9 @@ const UserProfile = ({ user, type }: UserProfileProps) => {
             height={18}
           />
         </Button>
-      </div>
+      </div> */}
 
-      {user?.posts.length > 0 ? (
-        <ul className="w-full mb-16 grid-flow-row grid grid-cols-3 h-full">
-          {user.posts.map((post: Models.Document) => (
-            <ExplorePosts key={post.$id} post={post} />
-          ))}
-        </ul>
-      ) : (
-        <div className="h-full w-full flex py-12 pb-24 items-center justify-center">
-          <div className="">
-            <Image
-              src="/assets/camera.svg"
-              alt="camera for no posts"
-              width={180}
-              height={180}
-            />
-            <p className="mt-4 text-stone-400">No posts from this user</p>
-          </div>
-        </div>
-      )}
+      <ProfileTabs posts={user.posts} saved={user.save} />
     </>
   );
 };

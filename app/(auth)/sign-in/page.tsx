@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { signInValidation } from "@/lib/validation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import Link from "next/link";
 import { useSignInAccount } from "@/lib/react-query/queries-mutation";
@@ -45,11 +45,15 @@ const SignInPage = () => {
 
   async function onSubmit(values: z.infer<typeof signInValidation>) {
     try {
-      toast.loading("Logging you in...")
+
       const session = await signInAccount({
         email: values.email,
         password: values.password,
       });
+
+      if(session.status === "400") {
+        return toast.error("Wrong credentials!")
+      }
 
       if (!session) {
         return toast("Sign in failed! please try again later.");
@@ -62,7 +66,7 @@ const SignInPage = () => {
         toast.success("Logged in successfully ❤️");
         return router.push("/home");
       } else {
-        return toast(
+        return toast.error(
           "Sign in failed! some error occurred while signing you in!"
         );
       }

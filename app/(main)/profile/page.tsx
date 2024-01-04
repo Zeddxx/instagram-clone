@@ -12,15 +12,17 @@ import UserLoading from "@/components/loaders/user-loading";
 import { IoExit } from "react-icons/io5";
 import UserProfile from "@/components/shared/user-profile";
 import UserProfileLoading from "@/components/loaders/user-profile-loading";
+import { toast } from "sonner";
 
 const ProfilePage = () => {
   const { data: user, isLoading: isUserLoading, isFetching } = useGetCurrentUser();
-  console.log(user);
   const { mutate: signOut, isSuccess } = useSignOutAccount()
+
   const router = useRouter()
 
   useEffect(() => {
     if(isSuccess){
+      toast.success("User signed out successfully! 😞🥺")
         return router.push("/sign-in")
     }
   },[isSuccess])

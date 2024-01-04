@@ -2,9 +2,10 @@
 
 import { useCallback, useState } from "react"
 import { FileWithPath, useDropzone } from "react-dropzone"
-import { Button } from "../ui/button"
+import { Button, buttonVariants } from "../ui/button"
 import Image from "next/image"
-import { convertFileToUrl } from "@/lib/utils"
+import { cn, convertFileToUrl } from "@/lib/utils"
+import { Label } from "../ui/label";
 
 type ProfileUploaderProps = {
     fieldChange: (files: File[]) => void
@@ -34,13 +35,14 @@ const ProfileUploader = ({ fieldChange, mediaUrl }: ProfileUploaderProps) => {
     <div
       {...getRootProps()}
       className="flex flex-col rounded-xl w-fit">
-      <input {...getInputProps()} className="cursor-pointer" />
+      <input {...getInputProps()} name="file" className="cursor-pointer" />
 
       {fileUrl ? (
         <>
-          <div className="flex justify-center w-full my-7">
+          <div className="flex justify-center w-full mt-10">
             <Image src={fileUrl} alt="image" className="rounded-full shrink-0 h-24 w-24 object-cover" height={95} width={95} />
           </div>
+          <Label htmlFor="file" className={cn(buttonVariants({ variant: "link", size: "sm", className: "mt-0 text-blue-500 cursor-pointer"}))}>Change profile picture</Label>
         </>
       ) : (
         <div className="w-fit">

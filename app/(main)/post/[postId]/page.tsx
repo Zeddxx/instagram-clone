@@ -2,6 +2,7 @@
 
 import SpecificPostLoading from "@/components/loaders/specific-post-loading";
 import Comments from "@/components/shared/comments";
+import MoreOption from "@/components/shared/more-option";
 import PostStats from "@/components/shared/post-stats";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Drawer, DrawerTrigger } from "@/components/ui/drawer";
@@ -10,7 +11,6 @@ import {
   useGetPostById,
   usePostComment,
 } from "@/lib/react-query/queries-mutation";
-import { MoreHorizontal } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -22,6 +22,7 @@ const SpecificPost = ({ params }: { params: { postId: string } }) => {
     isLoading: isPostLoading,
     isFetching,
   } = useGetPostById(params.postId || "");
+
   const { data: user } = useGetCurrentUser();
   const [isOpen, setIsOpen] = useState(false);
   const [comment, setComment] = useState<string>("");
@@ -60,7 +61,13 @@ const SpecificPost = ({ params }: { params: { postId: string } }) => {
       <header className="h-[44px] py-2 w-full">
         <nav className="flex px-4 items-center h-full w-full">
           <button className="" onClick={() => router.back()}>
-            <Image src="/assets/back.svg" className="dark:invert" width={9} height={18} alt="back" />
+            <Image
+              src="/assets/back.svg"
+              className="dark:invert"
+              width={9}
+              height={18}
+              alt="back"
+            />
           </button>
 
           <h2 className="font-bold ml-4 text-xl">Posts</h2>
@@ -89,9 +96,7 @@ const SpecificPost = ({ params }: { params: { postId: string } }) => {
             </div>
           </div>
 
-          <button>
-            <MoreHorizontal />
-          </button>
+          <MoreOption imageId={post?.imageId} postId={params.postId} user={usersPost} />
         </div>
 
         <div className="w-full h-[375px] relative">
@@ -121,11 +126,11 @@ const SpecificPost = ({ params }: { params: { postId: string } }) => {
           </p>
 
           <div className="flex gap-x-1">
-          {post?.tags.map((tag: string, index: number) => (
-            <p key={index} className="text-sm text-blue-500">
-              {tag}
-            </p>
-          ))}
+            {post?.tags.map((tag: string, index: number) => (
+              <p key={index} className="text-sm text-blue-500">
+                {tag}
+              </p>
+            ))}
           </div>
         </div>
 

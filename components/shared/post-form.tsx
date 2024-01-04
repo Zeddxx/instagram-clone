@@ -38,7 +38,7 @@ const PostForm = ({ count, post, action, setCount }: PostFormTypes) => {
 
   const router = useRouter();
 
-  const [currentFile, setCurrentFile] = useState<string>("");
+  const [currentFile, setCurrentFile] = useState<string>(post ? post?.imageUrl : "");
 
   const handleCancel = () => {
     return router.back();
@@ -101,7 +101,7 @@ const PostForm = ({ count, post, action, setCount }: PostFormTypes) => {
                 </button>
                 <button
                   onClick={() => setCount(2)}
-                  disabled={!form.getValues().file[0]}
+                  disabled={!currentFile}
                   className="py-2 font-medium text-blue-500"
                 >
                   Next

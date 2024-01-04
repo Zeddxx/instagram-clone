@@ -6,15 +6,6 @@
   @apply max-w-[375px] mx-auto w-full border;
 }
 
-/* body::-webkit-scrollbar {
-  display: none;
-}
-
-body{
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-} */
-
 image{
   user-select: none;
 }

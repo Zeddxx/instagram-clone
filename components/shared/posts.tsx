@@ -70,7 +70,7 @@ const Posts = ({ post }: PostProps) => {
           </div>
         </div>
 
-        <MoreOption user={isUserPost} postId={post.$id} />
+        <MoreOption imageId={post?.imageId} user={isUserPost} postId={post.$id} />
       </div>
 
       <div className="h-auto w-full relative border-b">
@@ -78,12 +78,6 @@ const Posts = ({ post }: PostProps) => {
       </div>
 
       <PostStats post={post} userId={user?.$id!} />
-
-      <div className="flex items-center gap-2 px-2">
-        <p className="text-sm font-medium">
-          {post.likes.length} Likes
-        </p>
-      </div>
 
       <div className="px-2 mt-1">
         <p className="text-sm">
