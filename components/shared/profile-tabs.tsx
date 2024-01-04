@@ -10,8 +10,6 @@ type ProfileTabsProps = {
 }
 
 const ProfileTabs = ({ posts, saved } : ProfileTabsProps) => {
-    console.log(saved);
-    console.log(posts);
   return (
     <Tabs defaultValue="posts" className="w-[400px]">
       <TabsList className={cn("max-w-[375px] w-full py-0 border-b")}>

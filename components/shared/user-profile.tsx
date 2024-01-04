@@ -2,7 +2,6 @@ import { Models } from "appwrite";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
 import Image from "next/image";
-import ExplorePosts from "@/app/(main)/explore/_components/explore-posts";
 import Link from "next/link";
 import ProfileTabs from "./profile-tabs";
 
@@ -12,7 +11,6 @@ type UserProfileProps = {
 };
 
 const UserProfile = ({ user, type }: UserProfileProps) => {
-  console.log(user);
   return (
     <>
       <div className="w-full h-auto px-4 mt-4 border-b">
