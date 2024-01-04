@@ -10,6 +10,8 @@ type ProfileTabsProps = {
 }
 
 const ProfileTabs = ({ posts, saved } : ProfileTabsProps) => {
+    console.log(saved);
+    console.log(posts);
   return (
     <Tabs defaultValue="posts" className="w-[400px]">
       <TabsList className={cn("max-w-[375px] w-full py-0 border-b")}>
@@ -57,7 +59,7 @@ const ProfileTabs = ({ posts, saved } : ProfileTabsProps) => {
       {saved.length > 0 ? (
         <ul className="w-full mb-16 grid-flow-row grid grid-cols-3 h-full">
           {saved.map((post: Models.Document) => (
-            <ExplorePosts key={post.$id} post={post} />
+            <ExplorePosts key={post.$id} post={post.post} />
           ))}
         </ul>
       ) : (
