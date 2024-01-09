@@ -3,8 +3,6 @@
 <img src="./public/assets/logo-white.svg" alt="instagram logo" width="1000px"/>
 
 # Instagram Clone
-
-# Instagram Clone
 [Link](https://instagram-clone-zeddxx.vercel.app)
 This is just made for learning purposes i have no intension to use this as marketing and other things 👍
 
