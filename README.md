@@ -24,6 +24,7 @@ Some feature that i implemented in this project are:
 - Post creation functionality - You can create the post by going to create.
 - User profile page - user can watch their user profile by clicking into profile icon.
 - explore page where you can see all posts in one place.
+- Search functionality where user can search other user with there username.
 
 ## Brief description
 
