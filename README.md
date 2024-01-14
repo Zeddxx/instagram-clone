@@ -2,21 +2,14 @@
 
 <img src="./public/assets/logo-white.svg" alt="instagram logo" width="1000px"/>
 
-<<<<<<< HEAD
 # Instagram Clone
-
-=======
-# Instagram Clone  
->>>>>>> 85368ee2968ea95dd38a8543e848e080d61892c7
 [Link](https://instagram-clone-zeddxx.vercel.app)
 This is just made for learning purposes i have no intension to use this as marketing and other things 👍
 
 ## Table of contents:
 
-<<<<<<< HEAD
 - [Brief description](#brief-description)
 - [Enviorment variable](#.env-example)
-=======
 - [Feature's](#feature)
 - [Brief description](#brief-description)
 - [Enviorment variable](#enviorment-variable-example)
@@ -31,12 +24,11 @@ Some feature that i implemented in this project are:
 - Post creation functionality - You can create the post by going to create.
 - User profile page - user can watch their user profile by clicking into profile icon.
 - explore page where you can see all posts in one place.
->>>>>>> 85368ee2968ea95dd38a8543e848e080d61892c7
+- Search functionality where user can search other user with there username.
 
 ## Brief description
 
 This is a social media clone made with NextJs 13.
-<<<<<<< HEAD
 
 - Reactjs as frontend
 - [Appwrite](https://www.appwrite.io) as my database
@@ -44,23 +36,7 @@ This is a social media clone made with NextJs 13.
   - appwrite storage
   - appwrite databases
 - [shadcn-ui](https://ui.shadcn.com) as my component library.
-- [Tanstack-react-query](https://tanstack.com) for realtime mutations and queries.
-
-## `.env` example
-
-```
-NEXT_PUBLIC_APPWRITE_DATABASE_ID=
-NEXT_PUBLIC_APPWRITE_DATABASE_ID=
-NEXT_PUBLIC_APPWRITE_DATABASE_ID=
-```
-=======
-- Reactjs as frontend
-- [Appwrite](https://www.appwrite.io) as my database
-    - appwrite auth
-    - appwrite storage
-    - appwrite databases
-- [shadcn-ui](https://ui.shadcn.com) as my component library.
-- [Tanstack-react-query](https://tanstack.com) for realtime mutations and queries.
+- [Tanstack-react-query](https://tanstack.com) for realtime mutations and queries
 
 
 ## ```enviorment variable``` example
@@ -73,7 +49,6 @@ NEXT_PUBLIC_APPWRITE_URL=
 
 NEXT_PUBLIC_APPWRITE_STORAGE_ID=
 NEXT_PUBLIC_APPWRITE_DATABASE_ID=
->>>>>>> 85368ee2968ea95dd38a8543e848e080d61892c7
 
 NEXT_PUBLIC_APPWRITE_SAVES_COLLECTION_ID=
 NEXT_PUBLIC_APPWRITE_POST_COLLECTION_ID=
