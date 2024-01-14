@@ -13,7 +13,7 @@ const ProfileTabs = ({ posts, saved } : ProfileTabsProps) => {
   return (
     <Tabs defaultValue="posts" className="w-[400px]">
       <TabsList className={cn("max-w-[375px] w-full py-0 border-b")}>
-        <TabsTrigger value="posts" className="w-full rounded-none h-full">
+        <TabsTrigger value="posts" className="w-full dark:bg-black dark:hover:bg-stone-950/10 border-r rounded-none h-full">
           <Image
             src="/assets/grid.svg"
             alt="posts"
@@ -22,7 +22,7 @@ const ProfileTabs = ({ posts, saved } : ProfileTabsProps) => {
             height={18}
           />
         </TabsTrigger>
-        <TabsTrigger value="saved" className="w-full rounded-none h-full">
+        <TabsTrigger value="saved" className="w-full dark:bg-black dark:hover:bg-stone-950/10  rounded-none h-full">
           <Image
             src="/assets/tag.svg"
             className="dark:invert"
@@ -34,7 +34,7 @@ const ProfileTabs = ({ posts, saved } : ProfileTabsProps) => {
       </TabsList>
       <TabsContent value="posts">
       {posts.length > 0 ? (
-        <ul className="w-full mb-16 grid-flow-row grid grid-cols-3 h-full">
+        <ul className="max-w-[375px] mb-16 grid grid-cols-3 h-full">
           {posts.map((post: Models.Document) => (
             <ExplorePosts key={post.$id} post={post} />
           ))}
@@ -53,9 +53,9 @@ const ProfileTabs = ({ posts, saved } : ProfileTabsProps) => {
         </div>
       )}
       </TabsContent>
-      <TabsContent value="saved">
+      <TabsContent value="saved" className="w-fit gap-0">
       {saved.length > 0 ? (
-        <ul className="w-full mb-16 grid-flow-row grid grid-cols-3 h-full">
+        <ul className="w-full mb-16 grid grid-cols-3 h-full">
           {saved.map((post: Models.Document) => (
             <ExplorePosts key={post.$id} post={post.post} />
           ))}
