@@ -101,7 +101,7 @@ const SpecificPost = ({ params }: { params: { postId: string } }) => {
         </div>
 
         <div className="w-full h-[375px] relative">
-          <Image
+          <img
             src={post?.imageUrl}
             alt="post image"
             width={375}
