@@ -2,7 +2,6 @@ import ExplorePosts from "@/app/(main)/explore/_components/explore-posts";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { Models } from "appwrite";
-import Image from "next/image";
 
 type ProfileTabsProps = {
     posts: Models.Document[]
@@ -14,7 +13,7 @@ const ProfileTabs = ({ posts, saved } : ProfileTabsProps) => {
     <Tabs defaultValue="posts" className="w-[400px]">
       <TabsList className={cn("max-w-[375px] w-full py-0 border-b")}>
         <TabsTrigger value="posts" className="w-full dark:bg-black dark:hover:bg-stone-950/10 border-r rounded-none h-full">
-          <Image
+          <img
             src="/assets/grid.svg"
             alt="posts"
             className="dark:invert"
@@ -23,7 +22,7 @@ const ProfileTabs = ({ posts, saved } : ProfileTabsProps) => {
           />
         </TabsTrigger>
         <TabsTrigger value="saved" className="w-full dark:bg-black dark:hover:bg-stone-950/10  rounded-none h-full">
-          <Image
+          <img
             src="/assets/tag.svg"
             className="dark:invert"
             alt="tag"
@@ -42,7 +41,7 @@ const ProfileTabs = ({ posts, saved } : ProfileTabsProps) => {
       ) : (
         <div className="h-full w-full flex py-12 pb-24 items-center justify-center">
           <div className="">
-            <Image
+            <img
               src="/assets/camera.svg"
               alt="camera for no posts"
               width={180}
@@ -63,7 +62,7 @@ const ProfileTabs = ({ posts, saved } : ProfileTabsProps) => {
       ) : (
         <div className="h-full w-full flex py-12 pb-24 items-center justify-center">
           <div className="">
-            <Image
+            <img
               src="/assets/camera.svg"
               alt="camera for no posts"
               width={180}
