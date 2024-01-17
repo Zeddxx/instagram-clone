@@ -26,6 +26,7 @@ const EditProfile = () => {
     isLoading: isCurrentUserLoading,
     isFetching,
   } = useGetCurrentUser();
+
   const { mutateAsync: updateUser, isPending: isLoadingUpdate } =
     useUpdateUser();
 

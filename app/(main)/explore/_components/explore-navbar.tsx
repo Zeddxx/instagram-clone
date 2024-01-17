@@ -8,7 +8,6 @@ import { FilterTap } from "@/constants";
 import useDebounce from "@/hooks/use-debounce";
 import { useGetSearchUser } from "@/lib/react-query/queries-mutation";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 import { useState } from "react";
 
 const ExploreNavbar = () => {
@@ -36,9 +35,10 @@ const ExploreNavbar = () => {
             )}
           />
           <span className="absolute left-2.5 top-1/2 -translate-y-1/2">
-            <Image
+            <img
               src="/assets/search.svg"
               alt="search"
+              loading="lazy"
               className="opacity-50 dark:invert"
               width={18}
               height={18}
@@ -66,7 +66,7 @@ const ExploreNavbar = () => {
             !!isSearchQuery && "opacity-0 scale-0 hidden"
           )}
         >
-          <Image
+          <img
             src="/assets/live.svg"
             className="dark:invert"
             alt="Live"
