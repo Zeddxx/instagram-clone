@@ -7,7 +7,7 @@ const SpecificPostLoading = () => {
       <header className="h-[44px] py-2 w-full">
         <nav className="flex px-4 items-center h-full w-full">
           <button className="">
-            <Image src="/assets/back.svg" width={10} height={18} alt="back" />
+            <img src="/assets/back.svg" width={10} height={18} alt="back" />
           </button>
 
           <h2 className="font-bold ml-4 text-lg">Posts</h2>

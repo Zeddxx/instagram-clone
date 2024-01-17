@@ -74,7 +74,7 @@ const Posts = ({ post }: PostProps) => {
       </div>
 
       <div className="h-auto w-full relative border-b">
-        <Image src={post.imageUrl} alt="post image" width={375} height={375} className="object-cover max-h-[375px] min-h-[375px]" />
+        <img src={post.imageUrl} loading="lazy" alt="post image" width={375} height={375} className="object-cover max-h-[375px] min-h-[375px]" />
       </div>
 
       <PostStats post={post} userId={user?.$id!} />

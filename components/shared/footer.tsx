@@ -20,7 +20,7 @@ const Footer = () => {
                 return(
                 <div key={item.name} className="w-[calc(100%/5)] shrink-0 flex items-center justify-center dark:invert">
                     <Link href={item.href} className="w-fit">
-                <Image
+                <img
                 src={isActive ? item.active : item.icon}
                 alt={item.name}
                 width={item.width}

@@ -1,5 +1,4 @@
 import { Models } from "appwrite"
-import Image from "next/image"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import Link from "next/link"
 import { useGetCurrentUser } from "@/lib/react-query/queries-mutation"

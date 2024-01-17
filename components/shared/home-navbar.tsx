@@ -9,9 +9,9 @@ const HomeNavbar = () => {
 
   return (
       <nav className="w-full h-1/2 flex justify-between dark:invert px-2 items-center">
-        <Image src="/assets/camera.svg" alt="Camera" width={24} height={24} className="opacity-40" />
+        <img src="/assets/camera.svg" alt="Camera" width={24} height={24} className="opacity-40" />
 
-        <Image src="/assets/logo.svg" alt="logo" width={105} height={28} />
+        <img src="/assets/logo.svg" alt="logo" width={105} height={28} />
 
         {/* <Image src="assets/messanger.svg" alt="Messanger" width={24} height={24} /> */}
         <button onClick={settings.onOpen}>

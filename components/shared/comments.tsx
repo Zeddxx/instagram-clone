@@ -71,7 +71,7 @@ const Comments = ({
                 </div>
 
                 <div className="cursor-pointer">
-                  <Image
+                  <img
                     src="/assets/like.svg"
                     className="dark:invert"
                     alt="like"
@@ -108,7 +108,7 @@ const Comments = ({
                   </div>
 
                   <div className="cursor-pointer">
-                    <Image
+                    <img
                       src="/assets/like.svg"
                       className="dark:invert"
                       alt="like"

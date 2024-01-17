@@ -1,9 +1,7 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useGetCurrentUser, useSignOutAccount } from "@/lib/react-query/queries-mutation";
-import Image from "next/image";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { IoExit } from "react-icons/io5";
@@ -41,7 +39,7 @@ const ProfilePage = () => {
           <h1 className="font-bold tracking-normal">{user?.username}</h1>
 
           <button>
-            <Image
+            <img
               src="/assets/bar.svg"
               alt="top-bar"
               className="dark:invert"

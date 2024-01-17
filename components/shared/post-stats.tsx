@@ -8,7 +8,6 @@ import {
 } from "@/lib/react-query/queries-mutation";
 import { checkIsLiked } from "@/lib/utils";
 import { Models } from "appwrite";
-import Image from "next/image";
 import { useState, useEffect } from "react";
 
 type PostStatsProps = {
@@ -69,14 +68,14 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
       <div className="h-max flex gap-[17.5px] items-center">
         <div className="cursor-pointer">
         {checkIsLiked(likes, userId)
-        ? <Image
+        ? <img
             src="/assets/liked.svg"
             alt="like"
             onClick={handleLikePost}
             width={24}
             height={21}
           />
-          : <Image
+          : <img
           src="/assets/like.svg"
           alt="like"
           onClick={handleLikePost}
@@ -87,7 +86,7 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
         }
         </div>
         <div className="cursor-pointer">
-          <Image
+          <img
             src="/assets/comment.svg"
             alt="comment"
             className="dark:invert"
@@ -97,7 +96,7 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
           />
         </div>
         <div className="cursor-pointer">
-          <Image
+          <img
             src="/assets/messanger.svg"
             alt="messanger"
             className="dark:invert"
@@ -108,7 +107,7 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
       </div>
 
       <div className="h-max w-fit cursor-pointer">
-        <Image
+        <img
           src={isSaved ? "/assets/saved.svg" : "/assets/save.svg"}
           alt="save"
           className="dark:invert"

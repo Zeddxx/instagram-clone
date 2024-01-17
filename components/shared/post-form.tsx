@@ -183,7 +183,7 @@ const PostForm = ({ count, post, action, setCount }: PostFormTypes) => {
                           {...field}
                         />
                         {currentFile && (
-                          <Image
+                          <img
                             src={currentFile}
                             alt="upload image"
                             className="aspect-square h-14 w-14 mt-1.5 cursor-pointer object-cover"
@@ -233,7 +233,7 @@ const PostForm = ({ count, post, action, setCount }: PostFormTypes) => {
                 )}
               />
               <div className="h-[382px] min-h-full w-full flex flex-col items-center justify-center gap-4">
-                <Image
+                <img
                   src="/assets/camera.svg"
                   alt="Camera"
                   className="opacity-25 dark:invert"

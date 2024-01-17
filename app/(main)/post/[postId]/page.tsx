@@ -61,7 +61,8 @@ const SpecificPost = ({ params }: { params: { postId: string } }) => {
       <header className="h-[44px] py-2 w-full">
         <nav className="flex px-4 items-center h-full w-full">
           <button className="" onClick={() => router.back()}>
-            <Image
+            <img
+            loading="lazy"
               src="/assets/back.svg"
               className="dark:invert"
               width={9}

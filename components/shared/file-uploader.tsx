@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction, useCallback, useState } from 'react'
 import { FileWithPath, useDropzone } from 'react-dropzone'
 import { Button } from '../ui/button'
-import Image from 'next/image'
 
 type FileUploaderProps = {
     fieldChange: (FILES: File[]) => void
@@ -36,7 +35,7 @@ const FileUploader = ({ fieldChange, mediaUrl, setCurrentFile }: FileUploaderPro
         fileUrl ? (
             <>
             <div className="flex flex-1 justify-center w-full">
-                <Image 
+                <img
                 src={fileUrl}
                 alt='image'
                 width={375}
@@ -47,7 +46,7 @@ const FileUploader = ({ fieldChange, mediaUrl, setCurrentFile }: FileUploaderPro
             </>
         ) : (
             <div className="w-full flex justify-center flex-col items-center h-[375px]">
-                <Image 
+                <img
                 src="/assets/camera.svg" 
                 width={96} 
                 height={77} 

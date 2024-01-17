@@ -1,7 +1,6 @@
 import { Models } from "appwrite";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
-import Image from "next/image";
 import Link from "next/link";
 import ProfileTabs from "./profile-tabs";
 
@@ -62,7 +61,7 @@ const UserProfile = ({ user, type }: UserProfileProps) => {
 
         <div className="flex items-center w-full py-4">
           <div className="h-16 w-16 rounded-full border dark:border-stone-700 grid place-items-center">
-            <Image
+            <img
               src="/assets/add-story.svg"
               alt="add story"
               className="dark:invert dark:opacity-70"
