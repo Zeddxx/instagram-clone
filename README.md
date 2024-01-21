@@ -6,6 +6,10 @@
 [Link](https://instagram-clone-zeddxx.vercel.app)
 This is just made for learning purposes i have no intension to use this as marketing and other things 👍
 
+> TODO:
+> - Infinite scrolling.
+> - Adding followers and follows functionality.
+
 ## Table of contents:
 
 - [Brief description](#brief-description)
