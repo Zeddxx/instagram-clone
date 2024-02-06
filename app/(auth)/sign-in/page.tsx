@@ -45,14 +45,13 @@ const SignInPage = () => {
 
   async function onSubmit(values: z.infer<typeof signInValidation>) {
     try {
-
       const session = await signInAccount({
         email: values.email,
         password: values.password,
       });
 
-      if(session.status === "400") {
-        return toast.error("Wrong credentials!")
+      if (session.status === "400") {
+        return toast.error("Wrong credentials!");
       }
 
       if (!session) {
@@ -73,6 +72,20 @@ const SignInPage = () => {
     } catch (error) {
       console.log(error);
       return toast("Sign in failed! please try again later.");
+    }
+  }
+
+  const handleDemoUser = async () => {
+    const loginDemoUser = await signInAccount({
+      email: "sahil@gmail.com",
+      password: "sahilahmed13"
+    })
+
+    if(loginDemoUser.status === '200') {
+      toast.success('Logged in Demo user successfull! 🍅')
+      return router.push('/home')
+    }else {
+      toast.error("Login Failed! 🌋")
     }
   }
 
@@ -129,6 +142,10 @@ const SignInPage = () => {
               </FormItem>
             )}
           />
+
+          <div className="w-full h-auto">
+            <button onClick={handleDemoUser} className="text-xs w-full text-end font-medium text-sky-400">Demo Account?</button>
+          </div>
           <Button
             isLoading={isUserLoading}
             type="submit"

@@ -1,7 +1,7 @@
+"use client";
+
 import { Models } from "appwrite";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { MoreHorizontalIcon } from "lucide-react";
-import Image from "next/image";
 import PostStats from "./post-stats";
 import {
   useGetCurrentUser,
@@ -21,11 +21,10 @@ const Posts = ({ post }: PostProps) => {
   const { data: user, isLoading: isUserLoading } = useGetCurrentUser();
   const [comment, setComment] = useState<string>("");
   const [isOpen, setIsOpen] = useState(false);
-
   const { mutateAsync: postComment, isPending: isPostPending } =
     usePostComment();
 
-  const isUserPost = user?.$id === post.creator.$id
+  const isUserPost = user?.$id === post.creator.$id;
 
   const handleCommentPost = async (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
@@ -38,7 +37,7 @@ const Posts = ({ post }: PostProps) => {
     }
   };
 
-  const userPost = user?.$id === post.creator.$id
+  const userPost = user?.$id === post.creator.$id;
 
   useEffect(() => {
     if (isOpen) {
@@ -55,26 +54,39 @@ const Posts = ({ post }: PostProps) => {
       {/* Posts banner */}
       <div className="h-[54px] w-full px-2 flex border-b items-center justify-between">
         <div className="flex gap-x-[10px] items-center">
-          <Link href={userPost ? '/profile' : `/profile/${post.creator.$id}`}>
-          <Avatar className="h-8 w-8">
-            <AvatarImage src={post.creator.imageUrl} />
-            <AvatarFallback>PA</AvatarFallback>
-          </Avatar>
+          <Link href={userPost ? "/profile" : `/profile/${post.creator.$id}`}>
+            <Avatar className="h-8 w-8">
+              <AvatarImage src={post.creator.imageUrl} />
+              <AvatarFallback>PA</AvatarFallback>
+            </Avatar>
           </Link>
 
           <div className="flex flex-col text-[13px] leading-none gap-px">
-            <Link href={userPost ? '/profile' : `/profile/${post.creator.$id}`}>
-            <h6 className="font-semibold">{post.creator.username}</h6>
+            <Link href={userPost ? "/profile" : `/profile/${post.creator.$id}`}>
+              <h6 className="font-semibold">{post.creator.username}</h6>
             </Link>
-            <p className="text-xs text-muted-foreground font-normal">{post.location}</p>
+            <p className="text-xs text-muted-foreground font-normal">
+              {post.location}
+            </p>
           </div>
         </div>
 
-        <MoreOption imageId={post?.imageId} user={isUserPost} postId={post.$id} />
+        <MoreOption
+          imageId={post?.imageId}
+          user={isUserPost}
+          postId={post.$id}
+        />
       </div>
 
       <div className="h-auto w-full relative border-b">
-        <img src={post.imageUrl} loading="lazy" alt="post image" width={375} height={375} className="object-cover max-h-[375px] min-h-[375px]" />
+        <img
+          src={post.imageUrl}
+          loading="lazy"
+          alt="post image"
+          width={375}
+          height={375}
+          className="object-cover max-h-[375px] min-h-[375px]"
+        />
       </div>
 
       <PostStats post={post} userId={user?.$id!} />
@@ -95,16 +107,18 @@ const Posts = ({ post }: PostProps) => {
       </div>
 
       <div className="px-2">
-          <Drawer
-            onOpenChange={() => setIsOpen(!isOpen)}
-            modal={false}
-            shouldScaleBackground={true}
-          >
-            <DrawerTrigger className="text-stone-500 text-sm">
-              {post.comments.length > 0 ? `View all ${post.comments.length} comments` : "View comment"}
-            </DrawerTrigger>
-            {isOpen && (
-              <Comments
+        <Drawer
+          onOpenChange={() => setIsOpen(!isOpen)}
+          modal={false}
+          shouldScaleBackground={true}
+        >
+          <DrawerTrigger className="text-stone-500 text-sm">
+            {post.comments.length > 0
+              ? `View all ${post.comments.length} comments`
+              : "View comment"}
+          </DrawerTrigger>
+          {isOpen && (
+            <Comments
               user={user!}
               comment={comment}
               handleComment={handleCommentPost}
@@ -112,8 +126,8 @@ const Posts = ({ post }: PostProps) => {
               setComment={setComment}
               isPostPending={isPostPending}
             />
-            )}
-          </Drawer>
+          )}
+        </Drawer>
       </div>
 
       <div className="flex w-full py-3 relative gap-x-1.5 items-center px-2">

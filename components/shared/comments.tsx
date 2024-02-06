@@ -53,7 +53,7 @@ const Comments = ({
               <div className="flex items-start justify-between gap-2">
                 <div className="flex gap-x-2">
                   <Avatar className="h-8 w-8 cursor-pointer">
-                    <AvatarImage src={user.imageUrl} />
+                    <AvatarImage src={user?.imageUrl} />
                     <AvatarFallback>CA</AvatarFallback>
                   </Avatar>
 
@@ -128,7 +128,7 @@ const Comments = ({
           <DrawerFooter className="flex justify-between">
             <div className="flex gap-x-1">
               <Avatar className="h-8 w-8">
-                <AvatarImage src={user.imageUrl} />
+                <AvatarImage src={user?.imageUrl} />
                 <AvatarFallback>PA</AvatarFallback>
               </Avatar>
 

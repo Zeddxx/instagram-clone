@@ -69,6 +69,7 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
         <div className="cursor-pointer">
         {checkIsLiked(likes, userId)
         ? <img
+        title="Unlike This"
             src="/assets/liked.svg"
             alt="like"
             onClick={handleLikePost}
@@ -76,6 +77,7 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
             height={21}
           />
           : <img
+          title="Like This"
           src="/assets/like.svg"
           alt="like"
           onClick={handleLikePost}
@@ -85,8 +87,9 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
         />
         }
         </div>
-        <div className="cursor-pointer">
+        <button>
           <img
+          title="Comment now"
             src="/assets/comment.svg"
             alt="comment"
             className="dark:invert"
@@ -94,7 +97,7 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
             width={22}
             height={23}
           />
-        </div>
+        </button>
         <div className="cursor-pointer">
           <img
             src="/assets/messanger.svg"
@@ -108,6 +111,7 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
 
       <div className="h-max w-fit cursor-pointer">
         <img
+        title="Save Post!"
           src={isSaved ? "/assets/saved.svg" : "/assets/save.svg"}
           alt="save"
           className="dark:invert"

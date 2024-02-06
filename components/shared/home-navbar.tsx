@@ -2,7 +2,6 @@
 
 import { useSettings } from "@/hooks/use-settings";
 import { SparkleIcon } from "lucide-react";
-import Image from "next/image";
 
 const HomeNavbar = () => {
   const settings = useSettings()
