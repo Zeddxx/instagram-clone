@@ -31,7 +31,7 @@ const ProfilePage = () => {
       <header className="h-[88px] w-full flex flex-col justify-end px-4">
         <nav className="h-[calc(100%/2)] w-full flex items-center justify-between">
           <div className="">
-            <Button onClick={() => signOut()} size="icon" variant="outline">
+            <Button title="Logout" onClick={() => signOut()} size="icon" variant="outline">
               <IoExit size={24} />
             </Button>
           </div>

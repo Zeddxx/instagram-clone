@@ -42,12 +42,12 @@ const UserProfile = ({ user, type }: UserProfileProps) => {
 
         {type === "CurrentUser" ? (
           <Button
-            asChild
             variant="outline"
+            asChild
             size="sm"
-            className="w-full mt-4 font-semibold"
+            className="w-full mt-4 flex font-semibold"
           >
-            <Link href={`/edit`}>Edit profile</Link>
+            <Link href={`/edit`} className="w-full">Edit profile</Link>
           </Button>
         ) : (
           <Button

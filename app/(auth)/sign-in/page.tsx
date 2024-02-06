@@ -77,8 +77,8 @@ const SignInPage = () => {
 
   const handleDemoUser = async () => {
     const loginDemoUser = await signInAccount({
-      email: "sahil@gmail.com",
-      password: "sahilahmed13"
+      email: "demo@gmail.com",
+      password: "demoaccount"
     })
 
     if(loginDemoUser.status === '200') {
