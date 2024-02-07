@@ -1,4 +1,5 @@
 > Basicaly i don't know how to write a better readme.md if this contains any mistake please let me know, otherwise let's go.
+> Also had a demo account login to view project as a demo user 😇🫶
 
 <img src="./public/assets/logo-white.svg" alt="instagram logo" width="1000px"/>
 
@@ -8,7 +9,6 @@ This is just made for learning purposes i have no intension to use this as marke
 
 > TODO:
 > - Infinite scrolling.
-> - Adding followers and follows functionality.
 
 ## Table of contents:
 
@@ -29,12 +29,14 @@ Some feature that i implemented in this project are:
 - User profile page - user can watch their user profile by clicking into profile icon.
 - explore page where you can see all posts in one place.
 - Search functionality where user can search other user with there username.
+- Saved posts and view saved posts.
 
 ## Brief description
 
 This is a social media clone made with NextJs 13.
 
 - Reactjs as frontend
+- NextJs as my framework
 - [Appwrite](https://www.appwrite.io) as my database
   - appwrite auth
   - appwrite storage
